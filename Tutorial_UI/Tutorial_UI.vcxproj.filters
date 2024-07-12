@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{55f2e592-8ae8-4be6-b853-b490c2a7e8d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FbxSDK">
+      <UniqueIdentifier>{dbe39709-447c-4bfc-8396-64572a59d3af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderManager">
+      <UniqueIdentifier>{cecd4762-1d1e-452d-8410-a716637cf28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderManager\HLSL">
+      <UniqueIdentifier>{0fdb5353-4568-410a-a41b-4f269b5ecbee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderManager\ShaderClass">
+      <UniqueIdentifier>{0d615400-e7e1-4617-9ea4-56b86f2a1156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{5243002f-06ca-4e00-b612-27b2b194743a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Elements">
+      <UniqueIdentifier>{d9827424-05a5-4677-b51d-3cb5af67d26d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CameraClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameTimer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InputClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TextClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureShaderClass.cpp">
+      <Filter>ShaderManager\ShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorShaderClass.cpp">
+      <Filter>ShaderManager\ShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxLoader.cpp">
+      <Filter>FbxSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>FbxSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonClass.cpp">
+      <Filter>UI\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxClass.cpp">
+      <Filter>UI\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfaceManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelInspector.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugInfoUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureShaderClass.h">
+      <Filter>ShaderManager\ShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorShaderClass.h">
+      <Filter>ShaderManager\ShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxLoader.h">
+      <Filter>FbxSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>FbxSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DClass.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonClass.h">
+      <Filter>UI\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxClass.h">
+      <Filter>UI\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfaceManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelInspector.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugInfoUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="InputClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameTimer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsStructures.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\ColorVs.hlsl">
+      <Filter>ShaderManager\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\PixelShader.hlsl">
+      <Filter>ShaderManager\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\VertexShader.hlsl">
+      <Filter>ShaderManager\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\ColorPs.hlsl">
+      <Filter>ShaderManager\HLSL</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
