@@ -133,7 +133,7 @@ bool ApplicationClass::Frame(HWND hwnd, InputClass* pInputClass, FrameTimer* pFr
 		bool keyDown;
 		float fps = pFrameTimer->GetTime();
 
-		m_CameraClass->SetFrameTime(1);
+		m_CameraClass->SetFrameTime(fps);
 
 		keyDown = pInputClass->GetKey(KEY_A);
 		m_CameraClass->MoveLeft(keyDown);

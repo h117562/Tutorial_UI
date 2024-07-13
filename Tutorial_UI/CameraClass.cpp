@@ -107,7 +107,7 @@ void CameraClass::MoveForward(bool keyDown)
 
 	if (keyDown)
 	{
-		m_forwardSpeed += m_frameTime * 0.1f;
+		m_forwardSpeed += m_frameTime;
 		if (m_forwardSpeed > (m_frameTime * m_maxSpeed))
 		{
 			m_forwardSpeed = m_frameTime * m_maxSpeed;
@@ -115,7 +115,7 @@ void CameraClass::MoveForward(bool keyDown)
 	}
 	else
 	{
-		m_forwardSpeed -= m_frameTime * 0.1f;
+		m_forwardSpeed -= m_frameTime;
 
 		if (m_forwardSpeed < 0.0f)
 		{
@@ -140,7 +140,7 @@ void CameraClass::MoveBackward(bool keyDown)
 	// Update the backward speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keyDown)
 	{
-		m_backwardSpeed += m_frameTime * 0.1f;
+		m_backwardSpeed += m_frameTime;
 
 		if (m_backwardSpeed > (m_frameTime * m_maxSpeed))
 		{
@@ -149,7 +149,7 @@ void CameraClass::MoveBackward(bool keyDown)
 	}
 	else
 	{
-		m_backwardSpeed -= m_frameTime * 0.1f;
+		m_backwardSpeed -= m_frameTime;
 
 		if (m_backwardSpeed < 0.0f)
 		{
@@ -175,7 +175,7 @@ void CameraClass::MoveLeft(bool keyDown)
 
 	if (keyDown)
 	{
-		m_leftSpeed += m_frameTime * 0.1f;
+		m_leftSpeed += m_frameTime;
 
 		if (m_leftSpeed > (m_frameTime * m_maxSpeed))
 		{
@@ -184,7 +184,7 @@ void CameraClass::MoveLeft(bool keyDown)
 	}
 	else
 	{
-		m_leftSpeed -= m_frameTime * 0.1f;
+		m_leftSpeed -= m_frameTime;
 
 		if (m_leftSpeed < 0.0f)
 		{
@@ -209,7 +209,7 @@ void CameraClass::MoveRight(bool keyDown)
 
 	if (keyDown)
 	{
-		m_rightSpeed += m_frameTime * 0.1f;
+		m_rightSpeed += m_frameTime;
 
 		if (m_rightSpeed > (m_frameTime * m_maxSpeed))
 		{
@@ -218,7 +218,7 @@ void CameraClass::MoveRight(bool keyDown)
 	}
 	else
 	{
-		m_rightSpeed -= m_frameTime * 0.1f;
+		m_rightSpeed -= m_frameTime;
 
 		if (m_rightSpeed < 0.0f)
 		{

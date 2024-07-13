@@ -16,7 +16,7 @@ public:
 	float GetTime();
 
 private:
-	float m_frequency;
+	INT64 m_frequency;
 	INT64 m_startTime;
 	float m_frameTime;
 	float m_ticksPerMs;

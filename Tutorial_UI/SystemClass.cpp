@@ -83,6 +83,12 @@ bool SystemClass::Initialize()
 		return false;
 	}
 
+	result = m_frameTimer->Initialize();
+	if (!result)
+	{
+		return false;
+	}
+
 	m_applicationClass = new ApplicationClass();
 	if (!m_applicationClass)
 	{
@@ -179,6 +185,8 @@ void SystemClass::Run()
 bool SystemClass::Frame()
 {
 	bool result;
+
+	m_frameTimer->Frame();
 
 	result = m_applicationClass->Frame(m_hwnd, m_inputClass, m_frameTimer);
 	if (!result)
