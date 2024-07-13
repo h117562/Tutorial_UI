@@ -3,6 +3,10 @@
 
 FrameTimer::FrameTimer()
 {
+	m_frequency = 0;
+	m_startTime = 0;
+	m_frameTime = 0.0f;
+	m_ticksPerMs = 0.0f;
 }
 
 
