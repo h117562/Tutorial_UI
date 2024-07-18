@@ -5,11 +5,13 @@ InterfaceManager::InterfaceManager()
 	m_debugUI = 0;
 	m_modelInspector = 0;
 
+	m_toggleF3 = false;
+	m_toggleF5 = false;
 	m_enableDebugUI = true;
 	m_enableModelInspector = true;
 }
 
-InterfaceManager::InterfaceManager(const InterfaceManager&)
+InterfaceManager::InterfaceManager(const InterfaceManager& other)
 {
 
 }

@@ -2,6 +2,7 @@
 #define _INTERFACE_MANAGER_H_
 
 #include "DebugInfoUI.h"
+#include "ShaderManager.h"
 #include "ModelInspector.h"
 #include "InputClass.h"
 
