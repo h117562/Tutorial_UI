@@ -8,8 +8,6 @@ ApplicationClass::ApplicationClass()
 	m_TextClass = 0;
 	m_ShaderManager = 0;
 
-	model1_world = XMMatrixIdentity() * XMMatrixScaling(0.1f, 0.1f, 0.1f);
-	model2_world = XMMatrixTranslation(5.0f, 5.0f, 0.0f) *XMMatrixScaling(5.0f, 5.0f, 5.0f);
 }
 
 ApplicationClass::~ApplicationClass()
@@ -147,43 +145,27 @@ bool ApplicationClass::Frame(HWND hwnd, InputClass* pInputClass, FrameTimer* pFr
 		keyDown = pInputClass->GetKey(KEY_W);
 		m_CameraClass->MoveForward(keyDown);
 
-
-	/*	XMFLOAT2 mousePos, screenSize;
-
-		m_Direct3D->GetScreenSize(screenSize);
-		pInputClass->GetMousePosition(mousePos);
-
-		screenSize.x /= 2;
-		screenSize.y /= 2;
-
-		mousePos.x -= screenSize.x;
-		mousePos.y -= screenSize.y;
-
-		m_CameraClass->UpdateRotation(mousePos);
-
-		RECT rect;
-		GetWindowRect(hwnd, &rect);
-
-		int centerX = (rect.left + rect.right) / 2;
-		int centerY = (rect.top + rect.bottom) / 2;
-
-		SetCursorPos(centerX, centerY);*/
 	}
 
+	Render(hwnd, pInputClass);
+
+	return true;
+}
+
+
+void ApplicationClass::Render(HWND hwnd, InputClass* pInputClass)
+{
 	m_CameraClass->Render();
 
-	//백 버퍼 초기화
+	//3D RenderTarget 초기화(특정 컬러로)
 	m_Direct3D->BeginScene(0.0f, 0.0f, 0.2f, 1.0f);
 
-	//model1_world = model1_world * XMMatrixRotationY(0.05f);//회전
-	//m_ShaderManager->GetTextureShader()->Render(m_Direct3D->GetDeviceContext(), model1_world, viewMatrix, projectionMatrix);
-	//m_FbxLoader->Render(m_Direct3D->GetDeviceContext());
-
+	//2D RenderTarget 초기화
 	m_TextClass->BeginDraw();
-	m_uiManager->Frame(m_Direct3D,hwnd, m_ShaderManager, m_TextClass, m_CameraClass, pInputClass);
+
+	//UI 렌더링
+	m_uiManager->Frame(m_Direct3D, hwnd, m_ShaderManager, m_TextClass, m_CameraClass, pInputClass);
 
 	m_TextClass->EndDraw();
 	m_Direct3D->EndScene();
-
-	return true;
 }

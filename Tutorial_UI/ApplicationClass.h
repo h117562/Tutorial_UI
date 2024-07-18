@@ -20,14 +20,13 @@ public:
 	bool Frame(HWND, InputClass*, FrameTimer*);
 
 private:
-	void Render(InputClass*);
+	void Render(HWND, InputClass*);
+
 private:
 	D3DClass* m_Direct3D;
 	CameraClass* m_CameraClass;
 	InterfaceManager* m_uiManager;
 	TextClass* m_TextClass;
 	ShaderManager* m_ShaderManager;
-	XMMATRIX model1_world;
-	XMMATRIX model2_world;
 };
 #endif
