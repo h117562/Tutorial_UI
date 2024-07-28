@@ -3,11 +3,11 @@
 
 #pragma comment(lib, "libfbxsdk-mt.lib")
 
+#include "Mesh.h"
 #include <windows.h>
 #include <commdlg.h>
 #include <tchar.h>
 
-#include "Mesh.h"
 
 class FbxLoader
 {
@@ -27,15 +27,15 @@ public:
 
 	DirectX::XMMATRIX GetWorldMatrix();
 private:
-	void processNode(FbxNode*, ID3D11Device* pDevice);
-	void processMesh(FbxNode*, ID3D11Device* pDevice);
-	bool GetTextureFromMaterial(FbxSurfaceMaterial*, ID3D11Device* pDevice, Mesh& mesh);
+	void processNode(FbxNode*, ID3D11Device*);
+	void processMesh(FbxNode*, ID3D11Device*);
+	bool GetTextureFromMaterial(FbxSurfaceMaterial*, ID3D11Device*, Mesh&);
 	void OpenFileDialog(HWND);
 
 private:
 	std::vector<Mesh> m_meshes;
 	char* m_filepath;
-
+	std::string m_previousTexturePath;
 	DirectX::XMMATRIX m_worldMatrix;//모델의 위치, 회전 방향을 포함한 행렬
 };
 

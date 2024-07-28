@@ -3,7 +3,7 @@
 FbxLoader::FbxLoader()
 {
 	m_filepath = 0;
-
+	m_previousTexturePath = "";
 	m_worldMatrix = DirectX::XMMatrixIdentity();
 }
 
@@ -60,11 +60,9 @@ bool FbxLoader::LoadFile(ID3D11Device* pDevice, HWND hwnd)
 		return false;
 	}
 
-	//로드된 파일의 데이터를 Scene에 담고 Importer 자원 반환
+	//로드된 파일의 데이터를 Scene에 담기
 	pImporter->Import(pScene);
-	pImporter->Destroy();
-	pImporter = nullptr;
-
+	
 	//보통 폴리곤 형태가 사각형으로 되어 있기도 하여 일단 삼각형 폴리곤으로 변환함
 	FbxGeometryConverter converter(pManager);
 	converter.Triangulate(pScene, true);//true시 원본 데이터 유지 
@@ -82,6 +80,10 @@ bool FbxLoader::LoadFile(ID3D11Device* pDevice, HWND hwnd)
 			return false;
 		}
 	}
+
+	//Importer 해제
+	pImporter->Destroy();
+	pImporter = nullptr;
 
 	return true;
 }
@@ -168,17 +170,22 @@ void FbxLoader::processMesh(FbxNode* pNode, ID3D11Device* pDevice)
 			lMesh.m_indices.emplace_back(i);
 		}
 
-		//텍스처가 있는 경우  저장
+		//텍스처가 있는 경우 저장
 		int materialCount = pNode->GetMaterialCount();
-		if (materialCount > 0)
+		for (int index = 0; index < materialCount; index++)
 		{
-			FbxSurfaceMaterial* pMaterial = pNode->GetMaterial(0);
+			FbxSurfaceMaterial* pMaterial = pNode->GetMaterial(index);
 			if (!pMaterial)
 			{
-				return;
+				break;
 			}
-		
-			GetTextureFromMaterial(pMaterial, pDevice, lMesh);
+			
+			bool result;
+			result = GetTextureFromMaterial(pMaterial, pDevice, lMesh);
+			if (result)
+			{
+				break;
+			}
 		}
 
 		m_meshes.emplace_back(lMesh);
@@ -191,7 +198,7 @@ void FbxLoader::processMesh(FbxNode* pNode, ID3D11Device* pDevice)
 //Material을 통해 텍스처 파일 경로를 알아내고 해당 경로를 통해 텍스처를 로드하는 함수
 bool FbxLoader::GetTextureFromMaterial(FbxSurfaceMaterial* pMaterial, ID3D11Device* pDevice, Mesh& mesh)
 {
-	HRESULT result;
+	bool result;
 
 	//Diffuse 속성을 가져옴 
 	FbxProperty prop = pMaterial->FindProperty(FbxSurfaceMaterial::sDiffuse);
@@ -201,25 +208,48 @@ bool FbxLoader::GetTextureFromMaterial(FbxSurfaceMaterial* pMaterial, ID3D11Devi
 	}
 
 	//텍스처 보유 확인
-	int textureCount = prop.GetSrcObjectCount<FbxTexture>();
-	if (!textureCount) 
+	int textureCount = prop.GetSrcObjectCount<FbxFileTexture>();
+	if (textureCount == 0)
 	{
+		//Diffuse 개수는 0인데 Normal은 정상적으로 나오는 경우가 가끔 있음 그래서 NormalMap 이 있을 경우 이전 메쉬의 텍스처를 강제로 적용하게 하였음
+		FbxProperty temp = pMaterial->FindProperty(FbxSurfaceMaterial::sNormalMap);
+		if (temp.IsValid())
+		{
+			int tempCount = temp.GetSrcObjectCount<FbxFileTexture>();
+			if (tempCount > 0)
+			{
+				result = mesh.SetResource(pDevice, m_previousTexturePath);//텍스처 경로를 전달하여 쉐이더 리소스로 저장
+				if (!result)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+		
 		return false;
 	}
 
 	//텍스처 파일 정보를 가져옴
 	FbxString tempstr;
 	FbxFileTexture* pTexture = prop.GetSrcObject<FbxFileTexture>();
-	if (!pTexture) {
-
+	if (!pTexture) 
+	{
 		return false;
 	}
 	
 	//파일 경로를 저장한다.
 	//저장한 FbxString을 string으로 변환
 	tempstr = pTexture->GetFileName();
-	mesh.SetResource(pDevice, tempstr.Buffer());
+	result = mesh.SetResource(pDevice, tempstr.Buffer());//텍스처 경로를 전달하여 쉐이더 리소스로 저장
+	if (!result)
+	{
+		return false;
+	}
 
+	//현재 메쉬의 텍스처 경로를 저장하고 FileTexture 해제
+	m_previousTexturePath = tempstr.Buffer();
 	pTexture->Destroy();
 
 	return true;

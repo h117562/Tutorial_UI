@@ -15,7 +15,7 @@ public:
 	void Render(ID3D11DeviceContext* pDeviceContext);
 	void Shutdown();
 
-	void SetResource(ID3D11Device* pDevice, std::string filePath);
+	bool SetResource(ID3D11Device* pDevice, std::string filePath);
 public:
 	std::vector<VertexTextureCoord> m_vertices;
 	std::vector<UINT> m_indices;

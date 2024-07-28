@@ -182,6 +182,7 @@ void InputClass::KeyReleased(const unsigned int keyCode)
 void InputClass::GetMousePosition(DirectX::XMFLOAT2& mousePos)
 {
 	mousePos = m_position;
+
 	return;
 }
 

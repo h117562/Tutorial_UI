@@ -47,34 +47,44 @@ bool Mesh::InitializeBuffer(ID3D11Device* pDevice)
 	return true;
 }
 
-void Mesh::SetResource(ID3D11Device* pDevice , std::string str)
+bool Mesh::SetResource(ID3D11Device* pDevice , std::string str)
 {
 	HRESULT result;
 	std::string filepath = str;
 
-	//파일 경로에서 마지막 \\가 /으로 나오는 문제가 있음 이를 바꿔줄거임
-	std::string target = "/";
-	std::string replacestr = "\\";
-	filepath.replace(filepath.find(target), target.size(), replacestr);
+	//파일 경로에서 마지막 \\가 //으로 나오는 문제가 있음 이를 수정함
+	std::string targetStr = "/";
+	std::string replaceStr = "\\";
 
-	int strlen = filepath.size();
+	auto pos = std::find(filepath.begin(), filepath.end(), targetStr[0]);
+	if (pos != filepath.end())
+	{
+		filepath.replace(filepath.find(targetStr), targetStr.size(), replaceStr);
+	}
+
+	int strlen = filepath.size() + 1;
 	const char* str_utf8 = filepath.c_str();
-	wchar_t* textureName = new wchar_t[strlen + 1];
+	wchar_t* textureName = new wchar_t[strlen];
 	if (textureName)
 	{
 		//멀티바이트 문자로 변환
-		MultiByteToWideChar(CP_UTF8, 0, str_utf8, -1, textureName, strlen + 1);
+		MultiByteToWideChar(CP_UTF8, 0, str_utf8, -1, textureName, strlen);// -1이면 함수는 종료 null 문자를 포함하여 전체 입력 문자열을 처리
 
 		//Diffuse 텍스처 파일 경로를 통해 텍스처 리소스 생성
 		result = D3DX11CreateShaderResourceViewFromFile(pDevice, textureName, 0, 0, &m_diffuseTexture, 0);
 		if (FAILED(result))
 		{
+			delete[] textureName;
+
 			m_diffuseTexture = NULL;
+
+			return false;
 		}
 	}
-	
+
 	delete[] textureName;
-	return;
+
+	return true;
 }
 
 
