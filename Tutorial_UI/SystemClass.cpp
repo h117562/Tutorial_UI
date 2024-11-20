@@ -147,10 +147,8 @@ void SystemClass::Run()
 	MSG msg;
 	bool done, result;
 
-
 	//변수 초기화
 	ZeroMemory(&msg, sizeof(MSG));
-
 
 	done = false;
 	while (!done)

@@ -1,4 +1,7 @@
+#include <Windows.h>
+
 #include "Systemclass.h"
+
 #pragma comment(linker , "/entry:WinMainCRTStartup /subsystem:console")
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
