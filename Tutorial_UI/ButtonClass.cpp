@@ -232,11 +232,10 @@ bool ButtonClass::CollisionCheck(D3DClass* pD3DClass, CameraClass* pCameraClass,
 	inverseViewProjection = XMMatrixInverse(NULL, viewProjectionMatrix);//역행렬을 구함
 
 	rayOrigin = XMVectorSet(mousePoint.x, mousePoint.y, 0.0f, 1.0f);//레이 시작
-	rayDirection = XMVectorSet(mousePoint.x, mousePoint.y, 1.0f, 1.0f);//레이 끝
-
 	rayOrigin = XMVector3Transform(rayOrigin, inverseViewProjection);//뷰.투영 역행렬로 벡터 변환
-	rayDirection = XMVector3Transform(rayDirection, inverseViewProjection);//뷰.투영 역행렬로 벡터 변환
 
+	rayDirection = XMVectorSet(mousePoint.x, mousePoint.y, 1.0f, 1.0f);//레이 끝
+	rayDirection = XMVector3Transform(rayDirection, inverseViewProjection);//뷰.투영 역행렬로 벡터 변환
 	rayDirection = XMVectorSubtract(rayDirection, rayOrigin);//레이 끝에서 시작을 빼서 방향을 구함
 	rayDirection = XMVector3Normalize(rayDirection);//레이 방향을 정규화
 
