@@ -241,7 +241,7 @@ bool FbxLoader::GetTextureFromMaterial(FbxSurfaceMaterial* pMaterial, ID3D11Devi
 	
 	//파일 경로를 저장한다.
 	//저장한 FbxString을 string으로 변환
-	tempstr = pTexture->GetFileName();
+	tempstr = pTexture->GetRelativeFileName();
 	result = mesh.SetResource(pDevice, tempstr.Buffer());//텍스처 경로를 전달하여 쉐이더 리소스로 저장
 	if (!result)
 	{
