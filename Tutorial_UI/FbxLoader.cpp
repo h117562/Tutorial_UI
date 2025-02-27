@@ -232,24 +232,31 @@ bool FbxLoader::GetTextureFromMaterial(FbxSurfaceMaterial* pMaterial, ID3D11Devi
 	}
 
 	//텍스처 파일 정보를 가져옴
-	FbxString tempstr;
+	FbxString filepath;
+	std::string tmpstr;
 	FbxFileTexture* pTexture = prop.GetSrcObject<FbxFileTexture>();
 	if (!pTexture) 
 	{
 		return false;
 	}
 	
-	//파일 경로를 저장한다.
-	//저장한 FbxString을 string으로 변환
-	tempstr = pTexture->GetRelativeFileName();
-	result = mesh.SetResource(pDevice, tempstr.Buffer());//텍스처 경로를 전달하여 쉐이더 리소스로 저장
+	//파일 경로를 얻음
+	filepath = pTexture->GetRelativeFileName(); //GetFileName()함수는 마지막 \\가 /로 변형되는 오류가 있음
+
+	//원본 파일 위치와 텍스처 위치 문자열을 합침
+	tmpstr = m_filepath;
+	tmpstr = tmpstr.substr(0, tmpstr.find_last_of("\\"));
+	tmpstr.append("\\");
+	tmpstr.append(filepath.Buffer());
+
+	result = mesh.SetResource(pDevice, filepath.Buffer());//텍스처 경로를 전달하여 쉐이더 리소스로 저장
 	if (!result)
 	{
 		return false;
 	}
 
 	//현재 메쉬의 텍스처 경로를 저장하고 FileTexture 해제
-	m_previousTexturePath = tempstr.Buffer();
+	m_previousTexturePath = filepath.Buffer();
 	pTexture->Destroy();
 
 	return true;
